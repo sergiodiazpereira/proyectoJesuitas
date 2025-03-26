@@ -24,12 +24,57 @@
 	
 //Ejecuta la consulta
 	$conexion->query($sql);
-	if($conexion->affected_rows>0)
-		echo "<h2>La visita ha sido guardada</h2>";															//Mensaje que aparece en la pagina web cuando idJesuita y IP se insertan correctamente
-	else{
+	if($conexion->affected_rows==0)
 		echo '<h2>Algo ha fallado, <a href="./index.html">vuelve a intentarlo</a></h2>';					//Mensaje que aparece en la pagina web cuando algo ha fallado al intentar insertar idJesuita y IP
+	else{
+		?>
+		
+		<!DOCTYPE html>
+		<html lang="es">
+			<head>
+				<meta charset="UTF-8">
+				<meta name="viewport" content="width=device-width, initial-scale=1.0">
+				<title>Visita Guardada</title>
+				<style>
+					body {
+						display: flex;
+						justify-content: center;
+						align-items: center;
+						height: 100vh;
+						background-color: #f0f8ff;
+						font-family: Arial, sans-serif;
+					}
+					.container {
+						background: white;
+						padding: 20px 40px;
+						border-radius: 10px;
+						box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+						text-align: center;
+						animation: fadeIn 1s ease-in-out;
+					}
+					@keyframes fadeIn {
+						from { opacity: 0; transform: translateY(-10px); }
+						to { opacity: 1; transform: translateY(0); }
+					}
+					.checkmark {
+						color: #28a745;
+						font-size: 50px;
+					}
+					h1 {
+						color: #333;
+						margin-top: 10px;
+					}
+				</style>
+			</head>
+			<body>
+				<div class="container">
+					<div class="checkmark">✔</div>
+					<h1>La visita ha sido guardada</h1>
+				</div>
+			</body>
+		</html>
+<?php	
 	}	
-
 //Cierra la conexión
 	$conexion->close();
 ?>
